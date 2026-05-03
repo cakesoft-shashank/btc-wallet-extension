@@ -1,5 +1,8 @@
 name: Firefox AMO Upload
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 on:
   workflow_dispatch:
     inputs:
@@ -25,7 +28,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -39,7 +42,7 @@ jobs:
           fi
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 20
           cache: npm
@@ -72,6 +75,41 @@ jobs:
             fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n");
           '
 
+      - name: Prepare AMO metadata
+        run: |
+          cat > amo-metadata.json <<'EOF'
+          {
+            "summary": {
+              "en-US": "A minimal secure non-custodial Bitcoin wallet extension."
+            },
+            "categories": [
+              "other"
+            ],
+            "version": {
+              "license": "MIT",
+              "approval_notes": "Built from the repository source with Vite. Human-readable source code is uploaded alongside listed submissions."
+            }
+          }
+          EOF
+
+      - name: Prepare source code archive
+        if: ${{ inputs.channel == 'listed' }}
+        run: |
+          rm -f source-code.zip
+          zip -qr source-code.zip \
+            README.md \
+            popup.html \
+            package.json \
+            package-lock.json \
+            vite.config.ts \
+            tsconfig.json \
+            tsconfig.app.json \
+            tsconfig.node.json \
+            public \
+            src \
+            scripts \
+            icons
+
       - name: Build Firefox package
         run: npm run package:firefox
 
@@ -95,13 +133,23 @@ jobs:
             exit 1
           fi
 
-          npx web-ext sign \
-            --source-dir firefox-dist \
-            --artifacts-dir web-ext-artifacts \
-            --api-key "$AMO_JWT_ISSUER" \
-            --api-secret "$AMO_JWT_SECRET" \
-            --channel "${{ inputs.channel || 'listed' }}" \
+          SIGN_ARGS=(
+            --source-dir firefox-dist
+            --artifacts-dir web-ext-artifacts
+            --api-key "$AMO_JWT_ISSUER"
+            --api-secret "$AMO_JWT_SECRET"
+            --channel "${{ inputs.channel }}"
             --timeout 900000
+          )
+
+          if [ "${{ inputs.channel }}" = "listed" ]; then
+            SIGN_ARGS+=(
+              --amo-metadata amo-metadata.json
+              --upload-source-code source-code.zip
+            )
+          fi
+
+          npx web-ext@8 sign "${SIGN_ARGS[@]}"
 
       - name: Upload signed artifacts
         uses: actions/upload-artifact@v4
