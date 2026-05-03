@@ -90,7 +90,7 @@ export const OnboardingPage = () => {
         <Flex direction="column" gap="4">
           <AppHeader
             title="Welcome"
-            subtitle="Minimal non-custodial Bitcoin wallet for Chrome."
+            subtitle="Minimal non-custodial Bitcoin wallet for Firefox and Chrome."
           />
           <Card>
             <Flex direction="column" gap="3">

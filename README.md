@@ -1,6 +1,6 @@
-# Bitcoin Wallet Chrome Extension
+# Bitcoin Wallet Browser Extension
 
-A minimal manifest V3 Bitcoin wallet extension built with React, TypeScript, Vite, and Radix UI.
+A minimal manifest V3 Bitcoin wallet extension for Chrome and Firefox, built with React, TypeScript, Vite, and Radix UI.
 
 ## Feature List
 
@@ -150,6 +150,24 @@ Build extension:
 npm run build
 ```
 
+Create browser-specific zip artifacts:
+
+```bash
+npm run package:extensions
+```
+
+Optional single-browser packaging:
+
+```bash
+npm run package:chrome
+npm run package:firefox
+```
+
+Artifacts are written to `release/`:
+
+- `bitcoin-wallet-chrome-v<version>.zip`
+- `bitcoin-wallet-firefox-v<version>.zip`
+
 Watch mode build:
 
 ```bash
@@ -168,12 +186,18 @@ Lint:
 npm run lint
 ```
 
-## Load Extension in Chrome
+## Load Unpacked Extension in Chrome
 
 1. Open `chrome://extensions`.
 2. Enable Developer mode.
 3. Click Load unpacked.
 4. Select the generated `dist` folder.
+
+## Load Unpacked Extension in Firefox
+
+1. Open `about:debugging#/runtime/this-firefox`.
+2. Click Load Temporary Add-on.
+3. Select `dist/manifest.json`.
 
 
 ## Architecture
@@ -181,8 +205,10 @@ npm run lint
 ### Runtime surfaces
 
 1. Popup UI (React app): primary wallet experience and stateful interaction.
-2. Background service worker: lightweight periodic session cleanup behavior.
-3. Chrome extension storage:
+2. Background runtime:
+	 - Chrome uses a Manifest V3 service worker.
+	 - Firefox uses a background script (event-page style) from the same `background.js` entry.
+3. WebExtension storage:
 	 - `chrome.storage.local` for persisted wallet record and theme preference
 	 - optional `chrome.storage.session` usage in background cleanup path
 4. External data/provider APIs: mempool.space for balance, UTXOs, fees, tx history, and broadcast.
