@@ -5,11 +5,15 @@ import * as bitcoin from "bitcoinjs-lib";
 import { ECPairFactory } from "ecpair";
 import * as ecc from "@bitcoin-js/tiny-secp256k1-asmjs";
 import type { WalletAccount, WalletNetwork, WalletType } from "@/types/wallet";
+import { ensureBitcoinEcc } from "@/bitcoin/ecc";
 
 const NATIVE_SEGWIT_MAINNET_PATH = "m/84'/0'/0'/0/0";
 const NATIVE_SEGWIT_TESTNET_PATH = "m/84'/1'/0'/0/0";
 const TAPROOT_MAINNET_PATH = "m/86'/0'/0'/0/0";
 const TAPROOT_TESTNET_PATH = "m/86'/1'/0'/0/0";
+
+ensureBitcoinEcc();
+
 const ECPair = ECPairFactory(ecc);
 
 const getBitcoinNetwork = (network: WalletNetwork): bitcoin.Network => {

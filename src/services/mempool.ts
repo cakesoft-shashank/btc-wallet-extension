@@ -3,6 +3,9 @@ import { ECPairFactory } from "ecpair";
 import * as ecc from "@bitcoin-js/tiny-secp256k1-asmjs";
 import type { FeeRates, PreparedTransaction, WalletNetwork, WalletType } from "@/types/wallet";
 import { getNetworkObject } from "@/bitcoin/wallet";
+import { ensureBitcoinEcc } from "@/bitcoin/ecc";
+
+ensureBitcoinEcc();
 
 const ECPair = ECPairFactory(ecc);
 
