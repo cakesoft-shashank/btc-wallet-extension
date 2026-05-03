@@ -32,7 +32,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "bitcoin-wallet@c58.local",
+      "id": "{f3a9c2e1-4b8d-4f7a-9e6c-2d1b5a8f3e90}",
       "strict_min_version": "140.0",
       "data_collection_permissions": {
         "required": ["none"]
