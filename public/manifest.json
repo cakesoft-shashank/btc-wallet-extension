@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "Bitcoin Wallet",
-  "description": "A minimal secure non-custodial Bitcoin wallet extension.",
+  "name": "Bitcoin Wallet by Shashank",
+  "description": "Independent open-source non-custodial Bitcoin wallet extension. Not affiliated with Mozilla or Bitcoin.org.",
   "version": "0.1.0",
   "action": {
-    "default_title": "Bitcoin Wallet",
+    "default_title": "Bitcoin Wallet by Shashank",
     "default_popup": "popup.html",
     "default_icon": {
       "16": "icons/icon16.png",
@@ -32,7 +32,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "{f3a9c2e1-4b8d-4f7a-9e6c-2d1b5a8f3e90}",
+      "id": "{0d6f9de0-31c4-4b6d-8f9f-0d8a9e7d2c41}",
       "strict_min_version": "140.0",
       "data_collection_permissions": {
         "required": ["none"]

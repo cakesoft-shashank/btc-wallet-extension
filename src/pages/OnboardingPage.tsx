@@ -18,7 +18,7 @@ type OnboardingStep = "intro" | "setup" | "mnemonic";
 export const OnboardingPage = () => {
   const { createWallet } = useWallet();
   const [step, setStep] = useState<OnboardingStep>("intro");
-  const [walletName, setWalletName] = useState("My Bitcoin Wallet");
+  const [walletName, setWalletName] = useState("My Wallet");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [network, setNetwork] = useState<WalletNetwork>("testnet");
@@ -90,16 +90,19 @@ export const OnboardingPage = () => {
         <Flex direction="column" gap="4">
           <AppHeader
             title="Welcome"
-            subtitle="Minimal non-custodial Bitcoin wallet for Firefox and Chrome."
+            subtitle="Independent open-source Bitcoin wallet extension by Shashank."
           />
           <Card>
             <Flex direction="column" gap="3">
-              <Text size="2">You control your keys and Mnemonic.</Text>
+              <Text size="2">You control your keys and recovery phrase.</Text>
               <Text size="2" color="gray">
-                Your Mnemonic and private key are encrypted before storage.
+                This extension is not affiliated with Mozilla, Bitcoin.org, or mempool.space.
               </Text>
               <Text size="2" color="gray">
-                Next you will create a password and back up your mnemonic phrase.
+                Review the code and use it at your own risk before storing real funds.
+              </Text>
+              <Text size="2" color="gray">
+                Next you will create a password and back up your recovery phrase.
               </Text>
             </Flex>
           </Card>
@@ -165,7 +168,7 @@ export const OnboardingPage = () => {
     <Flex direction="column" gap="4" className="full-height">
       <AppHeader
         title="Create Wallet"
-        subtitle="Private key material is encrypted before storage."
+        subtitle="Independent self-custody wallet. Double-check every address and backup offline."
       />
 
       <Card>

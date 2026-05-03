@@ -1,6 +1,8 @@
-# Bitcoin Wallet Browser Extension
+# Bitcoin Wallet by Shashank
 
-A minimal manifest V3 Bitcoin wallet extension for Chrome and Firefox, built with React, TypeScript, Vite, and Radix UI.
+An independent open-source manifest V3 Bitcoin wallet extension for Chrome and Firefox, built with React, TypeScript, Vite, and Radix UI.
+
+This project is not affiliated with Mozilla, Bitcoin.org, or mempool.space. It is an experimental self-custody wallet implementation and should be reviewed carefully before use with real funds.
 
 <img width="3050" height="1204" alt="image" src="https://github.com/user-attachments/assets/da8ffb5e-9f86-4b83-aa76-ec45fcbe7659" />
 

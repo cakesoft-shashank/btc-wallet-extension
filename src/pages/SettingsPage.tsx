@@ -83,6 +83,12 @@ export const SettingsPage = ({
 
       <Card className="home-panel-card">
         <Flex direction="column" gap="3">
+          <Text size="1" color="gray">
+            Independent project by Shashank. Not affiliated with Mozilla, Bitcoin.org, or mempool.space.
+          </Text>
+
+          <Separator size="4" />
+
           {/* Wallet Name */}
           <Text size="2" weight="bold">Wallet Name</Text>
           <Flex gap="2" align="center">
