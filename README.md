@@ -2,6 +2,8 @@
 
 A minimal manifest V3 Bitcoin wallet extension built with React, TypeScript, Vite, and Radix UI.
 
+<img width="3050" height="1204" alt="image" src="https://github.com/user-attachments/assets/da8ffb5e-9f86-4b83-aa76-ec45fcbe7659" />
+
 ## Feature List
 
 ### Wallet setup and onboarding
