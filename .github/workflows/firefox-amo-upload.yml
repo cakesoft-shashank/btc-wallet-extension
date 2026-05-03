@@ -38,6 +38,20 @@ jobs:
             exit 1
           fi
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: |
+          npm ci --include=optional
+          if [ ! -d "node_modules/@rollup/rollup-linux-x64-gnu" ]; then
+            echo "rollup linux binary missing after npm ci, applying npm optional dependency workaround"
+            npm i @rollup/rollup-linux-x64-gnu --no-save
+          fi
+
       - name: Apply version to package and manifest
         env:
           RELEASE_VERSION: ${{ inputs.version }}
@@ -57,15 +71,6 @@ jobs:
             manifest.version = version;
             fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n");
           '
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
 
       - name: Build Firefox package
         run: npm run package:firefox
