@@ -4,6 +4,8 @@ A minimal manifest V3 Bitcoin wallet extension for Chrome and Firefox, built wit
 
 <img width="3050" height="1204" alt="image" src="https://github.com/user-attachments/assets/da8ffb5e-9f86-4b83-aa76-ec45fcbe7659" />
 
+Firefox Add-on: https://addons.mozilla.org/en-GB/firefox/addon/bitcoin-wallet/
+
 ## Feature List
 
 ### Wallet setup and onboarding
